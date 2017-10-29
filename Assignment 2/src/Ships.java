@@ -13,17 +13,17 @@ public class Ships {
 	protected Point center;
 	private int radius;
 	
-	public Ships (Point location, Point center, int radius, String dir) {	
+	public Ships (Point ctr, int radius, String dir) {	
 		visbool = false;
-		this.location = location;
-		this.center = center;
+		this.location = new Point(ctr);
+		this.center = new Point(ctr);
 		this.radius = radius; 
 		setDirection(dir);
 	}
 	
 	public Ships (Point ctr, int radius) {
 		visbool = false;
-		this.center = ctr;
+		this.center = new Point(ctr);
 		this.radius = radius;
 		this.location = generateLocation();
 		this.direction = directionGenerator();
@@ -55,6 +55,22 @@ public class Ships {
 	
 	public Point getPos() {
 		return location;
+	}
+	
+	public void changeLocation() {	
+		//System.out.println("ChangeLocation");
+		switch (direction) {
+			case 1: location.y = location.y - 15;
+				break;
+			case 2: location.y = location.y + 15;
+				break;
+			case 3: location.x = location.x + 15;
+				break;
+			case 4: location.x = location.x - 15;
+				break;
+		}
+			
+		
 	}
 	
 	public int directionGenerator() {

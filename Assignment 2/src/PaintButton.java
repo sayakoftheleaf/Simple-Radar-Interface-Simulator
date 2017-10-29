@@ -11,35 +11,37 @@ public class PaintButton extends JButton implements ActionListener{
 	protected String direction;
 	
 	// records the current running state of the engine
-	// true if game is paused
-	// false if game is beginning or running
-	protected boolean pausedstate;
+	// 1 if game is paused
+	// 0 if game is beginning
+	// 2 if game is running
+	protected int pausedstate;
 	protected Main FrameMain;
 	
 	public PaintButton(String label, NewCanvas temppanel, String direction, Main Frame){
 		tempCanvas = temppanel;
 		this.label = label;
-		pausedstate = false;
+		pausedstate = 0;
 		FrameMain = Frame;
 		setText(this.label);
 		this.direction = direction;
 		addActionListener(this);
 	}
-	public boolean currentState() {
+	public int currentState() {
 		return pausedstate;
 	}
 	
 	public void flipState() {
-		pausedstate = !pausedstate;
+		if (pausedstate == 0) pausedstate = 2;
+		else if (pausedstate == 1) pausedstate = 2;
+		else if (pausedstate == 2) pausedstate = 1;
 	}
 	public void actionPerformed (ActionEvent e) {
 		if (label.equals("Reset")) {
-			if (FrameMain.returnState() == false) {
-				System.out.println("Insideresetfalse : " + false);
+			if (FrameMain.returnState() == 1 || FrameMain.returnState() == 0) {
 				tempCanvas.startNew(this.direction);
 				tempCanvas.repaint();
-			} else if (FrameMain.returnState() == true) {
-				System.out.println("Insideresetfalse : " + true);
+			} else if (FrameMain.returnState() == 2) {
+
 				JOptionPane.showMessageDialog(FrameMain,
 					    "Cannot Reset, process already running. Please stop and try again.",
 					    "Inane error",
@@ -50,18 +52,18 @@ public class PaintButton extends JButton implements ActionListener{
 		if (label.equals("Start")) {
 			label = "Stop";
 			this.setText(label);
-			if (pausedstate == false) {
+			if (pausedstate == 0) {
 				tempCanvas.startNew(this.direction);
 				tempCanvas.repaint();
 			}
-			//else if (pausedstate == true) {}
+			else if (pausedstate == 1) {}
 			flipState();
 		}
 		else if (label.equals("Stop")) {
 			label = "Start";
 			setText(label);
 			flipState();
-			System.out.println("Paused inside stop : " + pausedstate);
+			//System.out.println("Paused inside stop : " + pausedstate);
 		}
 	}
 

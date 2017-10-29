@@ -3,13 +3,15 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
-public class Main extends JFrame {
+public class Main extends JFrame implements ActionListener, KeyListener{
 	
 	// This needs to be a global variable because
 	// this button records the state of the game
 	// and other classes need access to this
 	// state
 	protected PaintButton stateButton;
+	
+	protected NewCanvas canvas;
 	
     public static void main (String [] args) {
 	java.awt.EventQueue.invokeLater (new Runnable() {
@@ -25,6 +27,7 @@ public class Main extends JFrame {
 	setLocation (50, 50);
 	setSize (1000, 1000);
 	setDefaultCloseOperation (EXIT_ON_CLOSE);
+	addKeyListener(this);
 
 	Container content = getContentPane();
 	content.setLayout (new BorderLayout()); 
@@ -35,7 +38,7 @@ public class Main extends JFrame {
 	content.add (gameLabel, BorderLayout.NORTH); 
 	
 	// Drawing canvas in middle
-	NewCanvas canvas = new NewCanvas (this);
+	canvas = new NewCanvas (this);
 	canvas.setBorder (new LineBorder(Color.BLACK, 2));
 	content.add (canvas, BorderLayout.CENTER);
 
@@ -82,10 +85,28 @@ public class Main extends JFrame {
 
 	// And show the whole window
 	setVisible (true);
+	
+	// start Timer
+	Timer timer = new Timer(500, this); //500 milliseconds
+	timer.start();
     }
     
-    public boolean returnState() {
+    public int returnState() {
     	return stateButton.currentState();
     }
+    
+    public void actionPerformed (ActionEvent e) {
+    	if (returnState() == 2) {
+    		canvas.runningState();
+    		canvas.repaint();
+    	}
+    }
+    
+    public void keyPressed(KeyEvent e) {
+    	if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+    		System.exit(0);
+    }
+    public void keyReleased(KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {}
 }
 

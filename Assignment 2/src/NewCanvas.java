@@ -17,12 +17,13 @@ public class NewCanvas extends JPanel{
 		start = new Point(50,50);
 		radius = 400;
 		center = new Point((int)start.getX() + radius, (int)start.getY() + radius);
-		MyShip = new Ships(center, center, radius, "North");
+		MyShip = new Ships(center, radius, "North");
 		ships = new Ships[3];
+		this.parent = parent;
 		
 		for (int a = 0; a < ships.length; a++) {
 			ships[a] = new Ships(center, radius);
-			System.out.println("NewCanvas " + ships[a].getPos());
+			//System.out.println("NewCanvas " + ships[a].getPos());
 		}
 	}
 	
@@ -36,27 +37,37 @@ public class NewCanvas extends JPanel{
 	
     // This is the draw callback
     public void paintComponent (Graphics g) {
+    	//System.out.println("Inside here");
     	super.paintComponent(g);
 		paintBorders(g);
 		if (MyShip.isVisible()) {
 			paintMyShip(g, MyShip.getPos());
 		}
 		for (int a = 0; a < 3; a++) {
-			if (ships[a].isVisible())
+			if (ships[a].isVisible()) {
 				//System.out.print(ships[a].getPos());
 				paintRShip(g, ships[a].getPos());
+			}
 		}
     }
     
     public void startNew(String temp_dir) {
-    	//System.out.println(ships.length);
     	for (int a = 0; a < ships.length; a++) {
 			ships[a] = new Ships(center,radius);
     		ships[a].setVisible(true);
-			System.out.println(ships[a].getPos());
     	}
-
+    	MyShip = new Ships(center,radius,"North");
+    	System.out.println("new Ship pos : "+ MyShip.getPos());
+    	System.out.println(getCenter());
     	MyShip.setVisible(true);
+    }
+    
+    public void runningState() {
+    	for (int a = 0; a < ships.length; a++) {
+			ships[a].changeLocation();
+			//System.out.println(ships[a].getPos());
+    	}
+    	MyShip.changeLocation();
     }
     
     public void paintBorders(Graphics g) {
