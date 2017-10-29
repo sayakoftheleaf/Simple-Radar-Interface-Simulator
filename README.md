@@ -22,3 +22,4 @@ Presently implemented:
 - Implement automatic potential collision detector for the main Ship
 - Implement collision warning
 - Implement auto-collision avoid for the randomized Ships
+- Implement more directions?
