@@ -9,7 +9,7 @@ Language = Java
 
 Time spent = 26 hours
 
-Presently implemented:
+# Presently implemented:
 
 - Working random position generator for a fixed number of nearby ships
 - Working GUI interface
@@ -19,13 +19,13 @@ Presently implemented:
 - Implemented animations for the Ships (all ships move 2 frames/100 millisecond).
 - Implemented live directional navigation
 
-#Known Bugs
+# Known Bugs
 - Ships move out of the map, but are still visible
 - Ships keep moving when the disappear from the visible map
 - Ships cross through each others paths
 - Output Button print the positions of Ships even the user hasn't clicked "Start" and the ships aren't visible on screen
 
-#Future TODOs : 
+# Future TODOs : 
 
 - Implement navigation using arrow keys
 - Implement relative movement of the Ships in relation to the Control Ship
@@ -34,7 +34,7 @@ Presently implemented:
 - Implement auto-collision avoid for the randomized Ships
 - Implement more directions?
 
-Inheritance hierarchy :
+# Inheritance hierarchy :
 
 - Main inherits from JFrame
 - LocationButton inherits from JButton
@@ -42,7 +42,7 @@ Inheritance hierarchy :
 - PaintButton inherits from JButton
 - Ships (does not inherit from any superclass)
 
-Aggregation hierarchy :
+# Aggregation hierarchy :
 
 - Ships has objects of :
 		- Point
