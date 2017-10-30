@@ -4,16 +4,25 @@ import java.util.Random;
 
 public class Ships {
 	
+	// Controls the visibility of the maps
+	// necessary for the initial start state
 	private boolean visbool;
 	
-	//north = 1, south = 2, east = 3, west = 4
+	// keeps track of the current direction
+	// local representations of the directions
+	// north = 1, south = 2, east = 3, west = 4
 	private int direction;
 	
+	// Keeps a record of the present location of the ship
 	private Point location;
+	// Local copies of the center and radiuses of the map
 	private Point center;
 	private int radius;
 	
+	// constrcutor overloading 
+	// this constructor is for the navigable ship
 	public Ships (Point ctr, int radius, String dir) {	
+		// not visible yet
 		visbool = false;
 		this.location = new Point(ctr);
 		this.center = new Point(ctr);
@@ -21,6 +30,7 @@ public class Ships {
 		setDirection(dir);
 	}
 	
+	// constructor for the randomized ships
 	public Ships (Point ctr, int radius) {
 		visbool = false;
 		this.center = new Point(ctr);
@@ -37,6 +47,7 @@ public class Ships {
 		visbool = temp;
 	}
 	
+	// Converts the Strings into the local 
 	public void setDirection(String dir) {
 		if (dir.equals("North"))
 			this.direction = 1;
@@ -57,6 +68,7 @@ public class Ships {
 		return location;
 	}
 	
+	// updates the location for each animation timer
 	public void changeLocation() {	
 		switch (direction) {
 			case 1: location.y = location.y - 2;
@@ -72,6 +84,7 @@ public class Ships {
 		
 	}
 	
+	// generates a random direction
 	public int directionGenerator() {
 		return (generaterandom(4,1));
 	}
@@ -95,7 +108,7 @@ public class Ships {
 		
 	}
 	
-	//
+	// generates a random number within a range
 	public int generaterandom (int max, int min) {
 		int temp = ((int) (Math.random() * max)) + min;
 		

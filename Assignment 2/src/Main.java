@@ -44,7 +44,7 @@ public class Main extends JFrame implements ActionListener, KeyListener{
 	JComboBox<String> combo = new JComboBox<String> (comboStrings);
 	
 	// Drawing canvas in middle
-	canvas = new NewCanvas (this, combo);
+	canvas = new NewCanvas (combo);
 	canvas.setBorder (new LineBorder(Color.BLACK, 2));
 	content.add (canvas, BorderLayout.CENTER);
 
@@ -63,7 +63,7 @@ public class Main extends JFrame implements ActionListener, KeyListener{
 	PaintButton resetButton = new PaintButton ("Reset", canvas, (String) combo.getSelectedItem(), this);
 	controls.add(resetButton);
 
-	// Now plug the control panel into the main frame
+	// Plugging the control panel into the main frame
 	content.add (controls, BorderLayout.SOUTH); 
 
 	// Output panel on right
@@ -71,7 +71,7 @@ public class Main extends JFrame implements ActionListener, KeyListener{
 	outp.setBorder (new LineBorder(Color.BLACK, 2));
 	outp.setLayout (new BoxLayout(outp, BoxLayout.Y_AXIS)); 
 
-	// Put these inside the settings panel
+	// Output panel components
 	JLabel label = new JLabel ("Get current locations of:");
 	outp.add (label); 
 	
@@ -86,31 +86,28 @@ public class Main extends JFrame implements ActionListener, KeyListener{
 	outp.add(ship3Button);
 	outp.add(myshipButton);
 	outp.add(allButton);
-	//JCheckBox graphicsCB = new JCheckBox ("Graphics", true);
-	//settings.add (graphicsCB); 
-	//JCheckBox animationCB = new JCheckBox ("Animation", true);
-	//settings.add (animationCB); 
-	//JCheckBox javascriptCB = new JCheckBox ("Javascript", false);
-	//settings.add (javascriptCB); 
-	//JCheckBox cookiesCB = new JCheckBox ("Cookies", false);
-	//settings.add (cookiesCB); 
 
 	// Plugging the output panel into the main frame
 	content.add (outp, BorderLayout.EAST); 
 
-	// And show the whole window
+	// Showing the whole window
 	setVisible (true);
 	
-	// start Timer
+	// Start Timer
 	Timer timer = new Timer(100, this); //100 milliseconds
 	timer.start();
     }
     
+    // returns whether the game has been paused, 
+    // hasn't even started, or is presently running
     public int returnState() {
     	return stateButton.currentState();
     }
     
+    // Animation segment
     public void actionPerformed (ActionEvent e) {
+    	// only run this segment when the game
+    	// is currently running
     	if (returnState() == 2) {
     		canvas.runningState();
     		canvas.repaint();
@@ -118,6 +115,7 @@ public class Main extends JFrame implements ActionListener, KeyListener{
     }
     
     public void keyPressed(KeyEvent e) {
+    	// using the escape character to exit
     	if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
     		System.exit(0);
     }

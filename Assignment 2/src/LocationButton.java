@@ -16,6 +16,8 @@ public class LocationButton extends JButton implements ActionListener{
 	}
 	
 	public void actionPerformed (ActionEvent e) {
+		// Only case 4 needs to be handled, because it needs to display
+		// the locations of all the ships. All other cases are similar.
 		switch (marker) {
 			case 4:	
 				tempShip = tempCanvas.getShip(0);
