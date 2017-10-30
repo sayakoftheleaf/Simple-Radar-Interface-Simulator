@@ -14,19 +14,56 @@ Presently implemented:
 - Working Start/Stop/Reset states (Can Stop only when Started, Can Reset only when Started and then Stopped. Cannot Reset when game is still running, or when game hasn't started yet)
 - Implemented randomized movements of the Ships
 - Implemented animations for the Ships (all ships move 2 frames/100 millisecond).
+- Implemented live directional navigation
 
 #Known Bugs
 - Ships move out of the map, but are still visible
+- Ships keep moving when the disappear from the visible map
 - Ships cross through each others paths
-- Live navigation is not working, so the user controlled ship only moves in the direction it started out with
-- New Directions have to be implemented by choosing the new direction and then using "Reset".
+- Output Button print the positions of Ships even the user hasn't clicked "Start" and the ships aren't visible on screen
 
+#Future TODOs : 
 
-#TODO : 
-
-- Implement directional navigation
 - Implement relative movement of the Ships in relation to the Control Ship
 - Implement automatic potential collision detector for the main Ship
 - Implement collision warning
 - Implement auto-collision avoid for the randomized Ships
 - Implement more directions?
+
+Inheritance hierarchy :
+
+- Main inherits from JFrame
+- LocationButton inherits from JButton
+- NewCanvas inherits from JPanel
+- PaintButton inherits from JButton
+- Ships (does not inherit from any superclass)
+
+Aggregation hierarchy :
+
+- Ships has objects of :
+		- Point
+- NewCanvas has objects of :
+		- Point
+		- Ships (User-defined)
+		- JComboBox
+		- Main (User-defined)
+		- Graphics
+- Main has objects of :
+		- NewCanvas (User-defined)
+		- PaintButton (User-defined)
+		- JLabel
+		- Container
+		- JComboBox
+		- LocationButton (User-defined)
+		- JPanel
+		- Timer
+		- (other temporary objects passed as arguments)
+- PaintButton has objects of : 
+		- NewCanvas (User-defined)
+		- Main (User-defined)
+		- JOptionPane
+- LocationButton has objects of : 
+		- Ships (User-defined)
+		- NewCanvas (User-defined)
+
+

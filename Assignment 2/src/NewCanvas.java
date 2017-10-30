@@ -10,16 +10,18 @@ public class NewCanvas extends JPanel{
 	private static int radius;
 	private static Ships MyShip;
 	private static Ships[] ships;
+	private JComboBox<String> tempComboBox;
 	
 	private Main parent;
 	
-	public NewCanvas(Main parent) {
+	public NewCanvas(Main parent, JComboBox<String> tempComboBox) {
 		start = new Point(50,50);
 		radius = 400;
 		center = new Point((int)start.getX() + radius, (int)start.getY() + radius);
-		MyShip = new Ships(center, radius, "North");
+		MyShip = new Ships(center, radius, (String) tempComboBox.getSelectedItem());
 		ships = new Ships[3];
 		this.parent = parent;
+		this.tempComboBox = tempComboBox;
 		
 		for (int a = 0; a < ships.length; a++) {
 			ships[a] = new Ships(center, radius);
@@ -71,7 +73,7 @@ public class NewCanvas extends JPanel{
 			ships[a] = new Ships(center,radius);
     		ships[a].setVisible(true);
     	}
-    	MyShip = new Ships(center,radius,"North");
+    	MyShip = new Ships(center,radius, (String) tempComboBox.getSelectedItem());
     	System.out.println("new Ship pos : "+ MyShip.getPos());
     	System.out.println(getCenter());
     	MyShip.setVisible(true);
@@ -82,6 +84,7 @@ public class NewCanvas extends JPanel{
 			ships[a].changeLocation();
 			//System.out.println(ships[a].getPos());
     	}
+    	MyShip.setDirection((String) tempComboBox.getSelectedItem());
     	MyShip.changeLocation();
     }
     

@@ -10,7 +10,7 @@ public class Ships {
 	private int direction;
 	
 	private Point location;
-	protected Point center;
+	private Point center;
 	private int radius;
 	
 	public Ships (Point ctr, int radius, String dir) {	
@@ -58,7 +58,6 @@ public class Ships {
 	}
 	
 	public void changeLocation() {	
-		//System.out.println("ChangeLocation");
 		switch (direction) {
 			case 1: location.y = location.y - 2;
 				break;

@@ -4,9 +4,9 @@ import java.awt.event.ActionEvent;
 
 public class LocationButton extends JButton implements ActionListener{
 	
-	protected int marker;
-	protected NewCanvas tempCanvas;
-	protected Ships tempShip;
+	private int marker;
+	private NewCanvas tempCanvas;
+	private Ships tempShip;
 	
 	public LocationButton(String label, int marker, NewCanvas tempcanvas){
 		setText(label);

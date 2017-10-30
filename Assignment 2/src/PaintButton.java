@@ -6,16 +6,16 @@ import java.awt.event.ActionEvent;
 
 public class PaintButton extends JButton implements ActionListener{
 	
-	protected NewCanvas tempCanvas;
-	protected String label;
-	protected String direction;
+	private NewCanvas tempCanvas;
+	private String label;
+	private String direction;
 	
 	// records the current running state of the engine
 	// 1 if game is paused
 	// 0 if game is beginning
 	// 2 if game is running
-	protected int pausedstate;
-	protected Main FrameMain;
+	private int pausedstate;
+	private Main FrameMain;
 	
 	public PaintButton(String label, NewCanvas temppanel, String direction, Main Frame){
 		tempCanvas = temppanel;

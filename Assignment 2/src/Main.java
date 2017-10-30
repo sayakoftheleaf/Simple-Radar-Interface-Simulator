@@ -9,9 +9,9 @@ public class Main extends JFrame implements ActionListener, KeyListener{
 	// this button records the state of the game
 	// and other classes need access to this
 	// state
-	protected PaintButton stateButton;
+	private PaintButton stateButton;
 	
-	protected NewCanvas canvas;
+	private NewCanvas canvas;
 	
     public static void main (String [] args) {
 	java.awt.EventQueue.invokeLater (new Runnable() {
@@ -37,8 +37,14 @@ public class Main extends JFrame implements ActionListener, KeyListener{
 	gameLabel.setBorder (new LineBorder(Color.BLACK, 2));
 	content.add (gameLabel, BorderLayout.NORTH); 
 	
+	// Direction selector inside the control panel
+	// This needd to be declared here because the canvas needs
+	// access to it
+	String[] comboStrings = { "North", "South", "East", "West" };
+	JComboBox<String> combo = new JComboBox<String> (comboStrings);
+	
 	// Drawing canvas in middle
-	canvas = new NewCanvas (this);
+	canvas = new NewCanvas (this, combo);
 	canvas.setBorder (new LineBorder(Color.BLACK, 2));
 	content.add (canvas, BorderLayout.CENTER);
 
@@ -48,9 +54,6 @@ public class Main extends JFrame implements ActionListener, KeyListener{
 	controls.setBorder (new LineBorder(Color.BLACK, 2));
 	controls.setLayout (new FlowLayout ()); 
 
-	// Direction selector inside the control panel
-	String[] comboStrings = { "North", "South", "East", "West" };
-	JComboBox<String> combo = new JComboBox<String> (comboStrings);
 	controls.add (combo); 
 
 	// 2 buttons inside control panel
