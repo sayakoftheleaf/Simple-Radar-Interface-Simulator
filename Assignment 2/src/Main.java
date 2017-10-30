@@ -25,7 +25,7 @@ public class Main extends JFrame implements ActionListener, KeyListener{
     	
 	// Window setup
 	setLocation (50, 50);
-	setSize (1000, 1000);
+	setSize (1100, 1000);
 	setDefaultCloseOperation (EXIT_ON_CLOSE);
 	addKeyListener(this);
 
@@ -63,25 +63,37 @@ public class Main extends JFrame implements ActionListener, KeyListener{
 	// Now plug the control panel into the main frame
 	content.add (controls, BorderLayout.SOUTH); 
 
-	// Settings panel on right
-	JPanel settings = new JPanel (); 
-	settings.setBorder (new LineBorder(Color.BLACK, 2));
-	settings.setLayout (new GridLayout (5, 1)); 
+	// Output panel on right
+	JPanel outp = new JPanel (); 
+	outp.setBorder (new LineBorder(Color.BLACK, 2));
+	outp.setLayout (new BoxLayout(outp, BoxLayout.Y_AXIS)); 
 
 	// Put these inside the settings panel
-	JLabel label = new JLabel ("Settings:");
-	settings.add (label); 
-	JCheckBox graphicsCB = new JCheckBox ("Graphics", true);
-	settings.add (graphicsCB); 
-	JCheckBox animationCB = new JCheckBox ("Animation", true);
-	settings.add (animationCB); 
-	JCheckBox javascriptCB = new JCheckBox ("Javascript", false);
-	settings.add (javascriptCB); 
-	JCheckBox cookiesCB = new JCheckBox ("Cookies", false);
-	settings.add (cookiesCB); 
+	JLabel label = new JLabel ("Get current locations of:");
+	outp.add (label); 
+	
+	LocationButton ship1Button = new LocationButton("Ship 1", 0, canvas);
+	LocationButton ship2Button = new LocationButton("Ship 2", 1, canvas);
+	LocationButton ship3Button = new LocationButton("Ship 3", 2, canvas);
+	LocationButton myshipButton = new LocationButton ("This ship", 3, canvas);
+	LocationButton allButton = new LocationButton("All", 4, canvas);
+	
+	outp.add(ship1Button);
+	outp.add(ship2Button);
+	outp.add(ship3Button);
+	outp.add(myshipButton);
+	outp.add(allButton);
+	//JCheckBox graphicsCB = new JCheckBox ("Graphics", true);
+	//settings.add (graphicsCB); 
+	//JCheckBox animationCB = new JCheckBox ("Animation", true);
+	//settings.add (animationCB); 
+	//JCheckBox javascriptCB = new JCheckBox ("Javascript", false);
+	//settings.add (javascriptCB); 
+	//JCheckBox cookiesCB = new JCheckBox ("Cookies", false);
+	//settings.add (cookiesCB); 
 
-	// Now plug the settings panel into the main frame
-	content.add (settings, BorderLayout.EAST); 
+	// Plugging the output panel into the main frame
+	content.add (outp, BorderLayout.EAST); 
 
 	// And show the whole window
 	setVisible (true);

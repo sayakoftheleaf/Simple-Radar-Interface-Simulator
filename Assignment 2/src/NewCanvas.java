@@ -34,6 +34,21 @@ public class NewCanvas extends JPanel{
     public int getRadius() {
     	return radius;
     }
+    
+    public Ships getShip(int marker) {
+    	Ships temp = ships[0];
+    	switch(marker) {
+    		case 0: temp = ships[0];
+    			break;
+    		case 1: temp = ships[1];
+    			break;
+    		case 2: temp = ships[2];
+    			break;
+    		case 3: temp = MyShip;
+    			break;
+    	}
+    	return temp;			
+    }
 	
     // This is the draw callback
     public void paintComponent (Graphics g) {
