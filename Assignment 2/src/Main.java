@@ -99,7 +99,7 @@ public class Main extends JFrame implements ActionListener, KeyListener{
 	setVisible (true);
 	
 	// start Timer
-	Timer timer = new Timer(500, this); //500 milliseconds
+	Timer timer = new Timer(100, this); //100 milliseconds
 	timer.start();
     }
     

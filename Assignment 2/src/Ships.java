@@ -60,13 +60,13 @@ public class Ships {
 	public void changeLocation() {	
 		//System.out.println("ChangeLocation");
 		switch (direction) {
-			case 1: location.y = location.y - 15;
+			case 1: location.y = location.y - 2;
 				break;
-			case 2: location.y = location.y + 15;
+			case 2: location.y = location.y + 2;
 				break;
-			case 3: location.x = location.x + 15;
+			case 3: location.x = location.x + 2;
 				break;
-			case 4: location.x = location.x - 15;
+			case 4: location.x = location.x - 2;
 				break;
 		}
 			
