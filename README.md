@@ -7,7 +7,7 @@ Originally created as a class assignment for COMP86 (Graphical User Interface wi
 Language = Java
 (It's an eclipse project, so eclipse is necessary to clone. Otherwise, individual .java files can be copied and compiled)
 
-Time spent = 26 hours
+Time spent = 28 hours
 
 # Presently implemented:
 
