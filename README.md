@@ -9,7 +9,7 @@ Language = Java
 
 Time spent = 26 hours
 
-Presently implemented:
+# Presently implemented:
 
 - Working random position generator for a fixed number of nearby ships
 - Working GUI interface
@@ -21,21 +21,21 @@ Presently implemented:
 - Navigable ship head direction changes when going in the desired direction
 - Collisions handled for the randomized ships
 
-#Known Bugs
+# Known Bugs
 - Ships move out of the map, but are still visible
 - Ships keep moving when the disappear from the visible map
 - Ships cross through each others paths
 - Output Button print the positions of Ships even the user hasn't clicked "Start" and the ships aren't visible on screen
 - When collisions are detected, ships will sometimes wiggle in position for a period of time after starting to move again
 
-#Future TODOs : 
+# Future TODOs : 
 
 - Implement navigation using arrow keys
 - Implement relative movement of the Ships in relation to the Control Ship
 - Implement collision warning
 - Implement more directions?
 
-Inheritance hierarchy :
+# Inheritance hierarchy :
 
 - Main inherits from JFrame
 - LocationButton inherits from JButton
@@ -43,7 +43,7 @@ Inheritance hierarchy :
 - PaintButton inherits from JButton
 - Ships (does not inherit from any superclass)
 
-Aggregation hierarchy :
+# Aggregation hierarchy :
 
 - Ships has objects of :
 		- Point
