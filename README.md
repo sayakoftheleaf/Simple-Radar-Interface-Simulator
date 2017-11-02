@@ -18,20 +18,21 @@ Presently implemented:
 - Implemented randomized movements of the Ships
 - Implemented animations for the Ships (all ships move 2 frames/100 millisecond).
 - Implemented live directional navigation
+- Navigable ship head direction changes when going in the desired direction
+- Collisions handled for the randomized ships
 
 #Known Bugs
 - Ships move out of the map, but are still visible
 - Ships keep moving when the disappear from the visible map
 - Ships cross through each others paths
 - Output Button print the positions of Ships even the user hasn't clicked "Start" and the ships aren't visible on screen
+- When collisions are detected, ships will sometimes wiggle in position for a period of time after starting to move again
 
 #Future TODOs : 
 
 - Implement navigation using arrow keys
 - Implement relative movement of the Ships in relation to the Control Ship
-- Implement automatic potential collision detector for the main Ship
 - Implement collision warning
-- Implement auto-collision avoid for the randomized Ships
 - Implement more directions?
 
 Inheritance hierarchy :

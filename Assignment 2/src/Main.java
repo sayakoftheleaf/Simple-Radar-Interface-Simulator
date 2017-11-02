@@ -12,6 +12,8 @@ public class Main extends JFrame implements ActionListener, KeyListener{
 	private PaintButton stateButton;
 	
 	private NewCanvas canvas;
+
+	private JComboBox<String> combo;
 	
     public static void main (String [] args) {
 	java.awt.EventQueue.invokeLater (new Runnable() {
@@ -41,7 +43,7 @@ public class Main extends JFrame implements ActionListener, KeyListener{
 	// This needd to be declared here because the canvas needs
 	// access to it
 	String[] comboStrings = { "North", "South", "East", "West" };
-	JComboBox<String> combo = new JComboBox<String> (comboStrings);
+	combo = new JComboBox<String> (comboStrings);
 	
 	// Drawing canvas in middle
 	canvas = new NewCanvas (combo);
@@ -65,11 +67,12 @@ public class Main extends JFrame implements ActionListener, KeyListener{
 
 	// Plugging the control panel into the main frame
 	content.add (controls, BorderLayout.SOUTH); 
-
+	content.addKeyListener(this);
+	
 	// Output panel on right
 	JPanel outp = new JPanel (); 
 	outp.setBorder (new LineBorder(Color.BLACK, 2));
-	outp.setLayout (new BoxLayout(outp, BoxLayout.Y_AXIS)); 
+	outp.setLayout (new BoxLayout(outp, BoxLayout.Y_AXIS));
 
 	// Output panel components
 	JLabel label = new JLabel ("Get current locations of:");
@@ -116,8 +119,22 @@ public class Main extends JFrame implements ActionListener, KeyListener{
     
     public void keyPressed(KeyEvent e) {
     	// using the escape character to exit
+    	System.out.println("keypressed");
     	if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
     		System.exit(0);
+    	else if (e.getKeyCode() == KeyEvent.VK_UP) {
+    		combo.setSelectedItem("North");
+    	}
+    	else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+    		combo.setSelectedItem("South");
+    	}
+    	else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+    		combo.setSelectedItem("West");
+    	}
+    	else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+    		combo.setSelectedItem("East");
+    	}
+    		
     }
     public void keyReleased(KeyEvent e) {}
     public void keyTyped(KeyEvent e) {}

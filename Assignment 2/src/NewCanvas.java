@@ -65,8 +65,10 @@ public class NewCanvas extends JPanel{
     public void paintComponent (Graphics g) {
     	super.paintComponent(g);
 		paintBorders(g);
+		collisionHandler();
+		mapCollision();
 		if (MyShip.isVisible()) {
-			paintMyShip(g, MyShip.getPos());
+			paintMyShip(g, MyShip.getPos(), MyShip.getDirection());
 		}
 		for (int a = 0; a < 3; a++) {
 			if (ships[a].isVisible()) {
@@ -98,6 +100,58 @@ public class NewCanvas extends JPanel{
     	MyShip.changeLocation();
     }
     
+    public void collisionHandler() {
+	
+    	for (int a = 0; a < 3; a++) {
+    		
+    		if (!(a == 2))
+    		{
+    			if (collisionDetector(ships[a], ships[a+1])
+    					|| collisionDetector(ships[a], MyShip)) {
+    				//System.out.print ("Then: " + ships[a].getDirection());
+    				ships[a].setDirection();
+    				//System.out.println (" vs Now: " + ships[a].getDirection());
+    				return;
+    				
+    			}
+    		} else {
+    			if (collisionDetector(ships[a], ships[0])
+    					|| collisionDetector(ships[a], MyShip)){
+    				//System.out.println("Then :" + ships[a].getDirection());
+    				ships[a].setDirection();
+    				//System.out.println(" vs Now :" + ships[a].getDirection());
+    			}
+    		}
+    		
+    	}
+    	
+    }
+    
+    public boolean collisionDetector (Ships ship1, Ships ship2){
+    	double dx = ship1.getPos().getX() - ship2.getPos().getX();
+    	double dy = ship1.getPos().getY() - ship2.getPos().getY();
+    	double dist = Math.sqrt(dx*dx + dy*dy);
+    	
+    	if (dist < 40)
+    		return true;
+    	else 
+    		return false;
+    	
+    }
+    
+    public void mapCollision() {
+    	for (int a = 0; a < 3; a++) {
+    		double dx = ships[a].getPos().getX() - center.getX();
+    		double dy = ships[a].getPos().getY() - center.getY();
+    		
+    		double dist = Math.sqrt(dx*dx + dy*dy);
+    		
+    		if (dist > (radius - 40))
+    			ships[a].setDirection();
+    		
+    	}
+    }
+    
     // paints the map
     public void paintBorders(Graphics g) {
     	g.drawOval(start.x,start.y,(radius*2), (radius*2));
@@ -106,10 +160,24 @@ public class NewCanvas extends JPanel{
     }
     
     // paints the navigable ship
-    public void paintMyShip(Graphics g, Point loc) {
-    	g.drawLine(loc.x - 10, loc.y + 10, loc.x + 10, loc.y + 10);
-    	g.drawLine(loc.x - 10, loc.y + 10, loc.x, loc.y - 10);
-    	g.drawLine(loc.x + 10, loc.y + 10, loc.x, loc.y - 10);
+    public void paintMyShip(Graphics g, Point loc, int direction) {
+    	if (direction == 1) {
+    		g.drawLine(loc.x - 10, loc.y + 10, loc.x + 10, loc.y + 10);
+    		g.drawLine(loc.x - 10, loc.y + 10, loc.x, loc.y - 10);
+    		g.drawLine(loc.x + 10, loc.y + 10, loc.x, loc.y - 10);
+    	} else if(direction == 3) {
+    		g.drawLine(loc.x - 10, loc.y - 10, loc.x - 10, loc.y + 10);
+    		g.drawLine(loc.x - 10, loc.y - 10, loc.x + 10, loc.y);
+    		g.drawLine(loc.x - 10, loc.y + 10, loc.x + 10, loc.y);
+    	} else if (direction == 2) {
+        	g.drawLine(loc.x + 10, loc.y - 10, loc.x - 10, loc.y - 10);
+        	g.drawLine(loc.x + 10, loc.y - 10, loc.x, loc.y + 10);
+        	g.drawLine(loc.x - 10, loc.y - 10, loc.x, loc.y + 10);
+        } else if (direction == 4) {
+        	g.drawLine(loc.x + 10, loc.y + 10, loc.x + 10, loc.y - 10);
+        	g.drawLine(loc.x + 10, loc.y + 10, loc.x -10, loc.y);
+        	g.drawLine(loc.x + 10, loc.y - 10, loc.x - 10, loc.y);
+        }
     }
     
     // paints the randomized ships

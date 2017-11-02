@@ -36,7 +36,7 @@ public class Ships {
 		this.center = new Point(ctr);
 		this.radius = radius;
 		this.location = generateLocation();
-		this.direction = directionGenerator();
+		setDirection();
 	}
 	
 	public boolean isVisible() {
@@ -45,6 +45,14 @@ public class Ships {
 	
 	public void setVisible(boolean temp) {
 		visbool = temp;
+	}
+	
+	public void setDirection() {
+		int tempdir = directionGenerator();
+		if (this.direction == tempdir)
+			setDirection();
+		else
+			this.direction = tempdir;
 	}
 	
 	// Converts the Strings into the local 
@@ -57,6 +65,10 @@ public class Ships {
 			this.direction = 3;
 		else if (dir.equals("West"))
 			this.direction = 4;
+	}
+	
+	public int getDirection() {
+		return this.direction;
 	}
 
 	public void setPos(int new_x, int new_y) {
@@ -86,7 +98,7 @@ public class Ships {
 	
 	// generates a random direction
 	public int directionGenerator() {
-		return (generaterandom(4,1));
+		return (generaterandom(5,0));
 	}
 	
 	// generates a random location on the map
