@@ -19,19 +19,20 @@ public class MapCanvas extends JPanel {
 
 	// These are the randomly navigated ships
 	private static Ships[] ships;
+	
+	private Color shipColor;
 
 	// This handles navigation of MyShip
 	private JComboBox<String> tempComboBox;
 
 	private stateHandler gamestate;
-
 	private Main Frame;
-
 	private int CollisionWarning;
 
 	// constructor
-	public MapCanvas(JComboBox<String> tempComboBox, stateHandler tempstate, Main Frame) {
+	public MapCanvas(JComboBox<String> tempComboBox, stateHandler tempstate, Color shipcolor, Main Frame) {
 
+		shipColor = shipcolor;
 		gamestate = tempstate;
 		this.Frame = Frame;
 		CollisionWarning = 0;
@@ -253,12 +254,16 @@ public class MapCanvas extends JPanel {
 			g.drawLine(loc.x + 10, loc.y - 10, loc.x - 10, loc.y);
 		}
 	}
+	
+	public void changeColor(Color tempcolor) {
+		shipColor = tempcolor;
+	}
 
 	// paints the randomized ships
 	public void paintRShip(Graphics g, Point loc, Color somecolor) {
 		g.setColor(Color.BLACK);
 		g.drawOval(loc.x, loc.y, 10, 10);
-		g.setColor(somecolor);
+		g.setColor(shipColor);
 		g.fillOval(loc.x, loc.y, 10, 10);
 	}
 }
