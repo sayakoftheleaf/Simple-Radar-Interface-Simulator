@@ -5,13 +5,11 @@ import javax.swing.border.*;
 
 public class Main extends JFrame implements ActionListener, KeyListener{
 	
-	// This needs to be a global variable because
-	// this button records the state of the game
-	// and other classes need access to this
-	// state
+	private stateHandler state;
+	
 	private PaintButton stateButton;
 	
-	private NewCanvas canvas;
+	private MapCanvas canvas;
 
 	private JComboBox<String> combo;
 	
@@ -25,11 +23,13 @@ public class Main extends JFrame implements ActionListener, KeyListener{
 
     public Main () {
     	
+    state = new stateHandler();
+    	
 	// Window setup
 	setLocation (50, 50);
 	setSize (1100, 1000);
+	// addKeyListener (this);
 	setDefaultCloseOperation (EXIT_ON_CLOSE);
-	addKeyListener(this);
 
 	Container content = getContentPane();
 	content.setLayout (new BorderLayout()); 
@@ -46,7 +46,7 @@ public class Main extends JFrame implements ActionListener, KeyListener{
 	combo = new JComboBox<String> (comboStrings);
 	
 	// Drawing canvas in middle
-	canvas = new NewCanvas (combo);
+	canvas = new MapCanvas (combo, state, this);
 	canvas.setBorder (new LineBorder(Color.BLACK, 2));
 	content.add (canvas, BorderLayout.CENTER);
 
@@ -59,15 +59,14 @@ public class Main extends JFrame implements ActionListener, KeyListener{
 	controls.add (combo); 
 
 	// 2 buttons inside control panel
-	stateButton = new PaintButton ("Start", canvas, (String) combo.getSelectedItem(), this);
+	stateButton = new PaintButton ("Start", canvas, (String) combo.getSelectedItem(), state, this);
 	controls.add (stateButton);
 	
-	PaintButton resetButton = new PaintButton ("Reset", canvas, (String) combo.getSelectedItem(), this);
+	PaintButton resetButton = new PaintButton ("Reset", canvas, (String) combo.getSelectedItem(), state, this);
 	controls.add(resetButton);
 
 	// Plugging the control panel into the main frame
 	content.add (controls, BorderLayout.SOUTH); 
-	content.addKeyListener(this);
 	
 	// Output panel on right
 	JPanel outp = new JPanel (); 
@@ -89,6 +88,17 @@ public class Main extends JFrame implements ActionListener, KeyListener{
 	outp.add(ship3Button);
 	outp.add(myshipButton);
 	outp.add(allButton);
+	
+	JLabel colorLabel = new JLabel ("Choose the color of the Random Ships");
+	outp.add(colorLabel);
+	
+	JRadioButton colorBlackButton = new JRadioButton("Black");
+	JRadioButton colorGreenButton = new JRadioButton ("Green");
+	JRadioButton colorBlueButton = new JRadioButton ("Blue");
+	
+	outp.add(colorBlueButton);
+	outp.add(colorBlackButton);
+	outp.add(colorGreenButton);
 
 	// Plugging the output panel into the main frame
 	content.add (outp, BorderLayout.EAST); 
@@ -103,23 +113,30 @@ public class Main extends JFrame implements ActionListener, KeyListener{
     
     // returns whether the game has been paused, 
     // hasn't even started, or is presently running
-    public int returnState() {
-    	return stateButton.currentState();
-    }
+   //  public int returnState() {
+   // 	return stateButton.currentState();
+  //  }
     
     // Animation segment
     public void actionPerformed (ActionEvent e) {
     	// only run this segment when the game
     	// is currently running
-    	if (returnState() == 2) {
+    	if (state.currentState() == 2) {
     		canvas.runningState();
     		canvas.repaint();
     	}
     }
-    
+  
+
     public void keyPressed(KeyEvent e) {
     	// using the escape character to exit
-    	System.out.println("keypressed");
+    	
+    	/* 
+    	 * This section is not working. Need to see a TA
+    	 */
+    	
+    	/* 
+    	 System.out.println("keypressed");
     	if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
     		System.exit(0);
     	else if (e.getKeyCode() == KeyEvent.VK_UP) {
@@ -134,6 +151,8 @@ public class Main extends JFrame implements ActionListener, KeyListener{
     	else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
     		combo.setSelectedItem("East");
     	}
+    	
+    	*/
     		
     }
     public void keyReleased(KeyEvent e) {}
